@@ -29,10 +29,22 @@
 
 namespace uv::core
 {
-	struct MarketData
-	{
-		Real r; // continuously compounded risk-free rate
-		Real q; // continuously compounded dividend yield
-		Real S; // spot price
-	};
-}
+    /**
+     * @brief Container for basic market inputs.
+     *
+     * Holds the minimal set of continuously compounded market parameters
+     * required by pricing and calibration routines.
+     *
+     * All quantities are expressed under the same measure and conventions:
+     * - interest rates and yields are continuously compounded
+     * - spot price is expressed in domestic currency units
+     *
+     * This struct is a passive data holder with no invariants enforced.
+     */
+    struct MarketData
+    {
+        Real r;   // Continuously compounded risk-free rate
+        Real q;   // Continuously compounded dividend yield
+        Real S;   // Spot price
+    };
+} // namespace uv::core
