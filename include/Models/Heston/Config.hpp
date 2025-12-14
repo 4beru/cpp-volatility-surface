@@ -31,10 +31,16 @@
 
 namespace uv::models::heston
 {
-	struct Config
-	{
-		Real alphaItm;                                    // Damping parameter value when ln(F/K) >= 0
-		Real alphaOtm;                                    // Damping parameter value when ln(F/K) < 0 
-		Real eps{ std::numeric_limits<Real>::epsilon() };  // Machine Epsilon
-	};
+    /**
+     * @brief Configuration parameters for the Heston Fourier / contour-shift pricer.
+     *
+     * Stores damping parameters used to ensure integrability of the pricing integral,
+     * plus a small numerical epsilon used for stability guards.
+     */
+    struct Config
+    {
+        Real alphaItm;                                    ///< Damping parameter when ln(F/K) >= 0 (ITM region).
+        Real alphaOtm;                                    ///< Damping parameter when ln(F/K) < 0  (OTM region).
+        Real eps{ std::numeric_limits<Real>::epsilon() }; ///< Numerical epsilon (defaults to machine epsilon).
+    };
 }
