@@ -24,8 +24,6 @@
 
 #pragma once
 
-#include "Utils/Types.hpp"
-
 #include <concepts>
 #include <cstddef>
 #include <span>
@@ -43,18 +41,21 @@ namespace uv::core
 
 	public:
 
-		MatrixT(T val,
-		std::size_t numRows,
-		std::size_t numColumns) noexcept;
-
-
-		std::size_t rows() const noexcept;
+		MatrixT() = delete;
+		MatrixT(std::size_t numRows,
+		std::size_t numColumns,
+		T val = T(0)) noexcept;
 
 
 		std::span<T> operator[](std::size_t i) noexcept;
 		std::span<const T> operator[](std::size_t i) const noexcept;
 
-		void print() const noexcept;
+		void print(unsigned int valuePrec = 4) const noexcept;
+		bool empty() const noexcept;
+
+		// Getters
+		std::size_t rows() const noexcept;
+		std::size_t size() const noexcept;  // For STL API compatibility
 
 	};
 
