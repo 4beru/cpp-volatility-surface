@@ -25,7 +25,7 @@
 
 #pragma once
 
-#include "Utils/Types.hpp"
+#include <concepts>
 
 namespace uv::core
 {
@@ -41,10 +41,11 @@ namespace uv::core
      *
      * This struct is a passive data holder with no invariants enforced.
      */
+    template <std::floating_point T>
     struct MarketData
     {
-        Real r;   // Continuously compounded risk-free rate
-        Real q;   // Continuously compounded dividend yield
-        Real S;   // Spot price
+        T r;   // Continuously compounded risk-free rate
+        T q;   // Continuously compounded dividend yield
+        T S;   // Spot price
     };
 } // namespace uv::core
