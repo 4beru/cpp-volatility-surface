@@ -25,6 +25,7 @@
 #pragma once
 
 #include "Core/Types.hpp"
+#include "Models/LocalVol/AHCache.hpp"
 
 #include <concepts>
 #include <cstddef>
@@ -33,49 +34,47 @@
 
 namespace uv::models::localvol
 {
-	template 
-	<
-		std::floating_point T, 
-		std::size_t nT, 
-		std::size_t nX,
-		typename Fn
-	>
-	class Pricer
-	{ 
+	template
+		<
+		std::floating_point T,
+		std::size_t NT,
+		std::size_t NX
+		>
+		class Pricer
+	{
 	private:
 
-		// Chang-Cooper coefficients
-		std::array<T, nX - 1 > B_{};
-		std::array<T, nX - 1 > C_{};
-
-		// Payoff data
-		T t_;
+		// Market data
 		T r_;
-		T F_;
-		T K_;
-		Fn payoff_;
+		T q_;
 
-		// Grid data
-		std::array<T, nX> xGrid_;
-		T dt_;
-		T dx_;
-		std::array<T, nX> pdfGrid_;
+		// Grids
+		std::array<T, NX> xGrid_;
+		std::array<T, NX> c_;
+		std::array<T, NX> cInit_;
 
-		// Private functions
-		T normalizeForward_(T F) const noexcept;
-		
+
+		// Cached variables and buffers
+		AHCache<T, NX> ahCache_{};
+
 	public:
 
 		Pricer() = delete;
-		Pricer(T t,
-			T r,
-			T F,
-			T K,
-			Fn payoff,
-			const std::array<T, nX>& xGrid);
 
-		T price(T localVar);
+		template <typename F>
+		Pricer(F&& payoff,
+			Vector<T> r,
+			Vector<T> q,
+			T xBound
+		);
+
+		Vector<T> price(T maturity,
+			std::span<const T> logKF,
+			std::span<const T> localVar
+		);
+
 	};
+
 } // namespace uv::models::localvol
 
 #include "Pricer.inl"
