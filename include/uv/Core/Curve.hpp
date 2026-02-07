@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include <Base/Alias.hpp>
+#include "Base/Alias.hpp"
 
 #include <concepts>
 #include <cstddef>
@@ -44,4 +44,4 @@ template <std::floating_point T> class Curve
 };
 } // namespace uv::core
 
-#include <Core/Detail/Curve.inl>
+#include "Core/Detail/Curve.inl"
