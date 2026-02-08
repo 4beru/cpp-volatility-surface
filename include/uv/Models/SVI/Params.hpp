@@ -18,6 +18,7 @@
 #pragma once
 
 #include <concepts>
+#include <span>
 
 namespace uv::models::svi
 {
@@ -25,6 +26,7 @@ namespace uv::models::svi
 template <std::floating_point T> struct Params
 {
     T t;
+
     T a;
     T b;
     T rho;
