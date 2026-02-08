@@ -9,27 +9,32 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under this License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the LICENSE for the specific language governing permissions and
- * limitations under this License.
+ * limitations under the License.
  */
 
-// #pragma once
+#pragma once
 
-// #include "cstddef"
+#include <Base/Types.hpp>
 
-// namespace uv::models::heston {
+#include <string_view>
 
-//     template<std::size_t Nodes = 300>
-//     struct Config
-//     {
-//     unsigned int maxEval{10000};
-//     double functionTol{1e-12};
+namespace uv::models::heston::calibrate
+{
 
-//     double functionTol{1e-12};
-//     bool verbose{true};
+struct Config
+{
+    double tolerance{1e-12};
+    unsigned int maxEval{10000};
+    bool weightAtm{true};
+    bool verbose{false};
+};
 
-//     };
+namespace detail
+{
+inline Vector<std::string_view> paramNames{"kappa", "theta", "sigma", "rho", "v0"};
+}
 
-// }
+} // namespace uv::models::heston::calibrate
