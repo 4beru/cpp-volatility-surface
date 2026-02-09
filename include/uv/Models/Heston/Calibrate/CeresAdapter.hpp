@@ -25,8 +25,9 @@ namespace uv::models::heston::calibrate::detail
 {
 opt::ceres::Config makeCeresConfig(const Config& config) noexcept;
 
-using HestonPolicy =
-    opt::ceres::Policy<ceres::LEVENBERG_MARQUARDT, ceres::DENSE_NORMAL_CHOLESKY>;
+using HestonPolicy = opt::ceres::Policy<
+    opt::ceres::TrustRegionStrategy::LevenbergMarquardt,
+    opt::ceres::LinearSolver::DenseQR>;
 
 opt::ceres::Optimizer<HestonPolicy> makeOptimizer(const Config& config) noexcept;
 

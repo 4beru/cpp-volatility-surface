@@ -24,7 +24,7 @@
 
 namespace uv::opt::nlopt::detail
 {
-constexpr ::nlopt::algorithm toNlopt(Algorithm a) noexcept
+inline constexpr ::nlopt::algorithm toNlopt(Algorithm a) noexcept
 {
     switch (a)
     {
@@ -36,6 +36,6 @@ constexpr ::nlopt::algorithm toNlopt(Algorithm a) noexcept
         return ::nlopt::LN_BOBYQA;
     }
 
-    UV_UNREACHABLE("Unknown uv::opt::nlopt::Algorithm value");
+    UV_UNREACHABLE(Algorithm, a);
 }
 } // namespace uv::opt::nlopt::detail
