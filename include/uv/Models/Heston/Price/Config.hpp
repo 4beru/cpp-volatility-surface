@@ -30,6 +30,6 @@ template <std::floating_point T> struct Config
     T eps{std::numeric_limits<T>::epsilon()};
 };
 
-inline constexpr std::size_t defaultNodes{300};
+inline constexpr std::size_t defaultNodes{500};
 
 } // namespace uv::models::heston::price
